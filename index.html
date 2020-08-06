@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vuette</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <p>
+      你好, {{  content  }}, {{ description }}
+    </p>
+    <p>
+      {{ description }}, {{ content }}
+    </p>
+
+    <input type="text" v-model="obj.innerObj.a">
+
+    <p>
+      {{ obj.innerObj.a }}
+    </p> -->
+
+    <!-- <ul>
+      <li v-for="(list) in nestList">
+        <ul>
+          <li v-for="item in list">
+            name: {{ item.name }}
+            age: {{ item.age }}
+          </li>
+        </ul>
+      </li>
+    </ul> -->
+
+    <ul>
+      <li v-for="(item,index) in list">
+        name: {{ item.name }} {{ index }}
+      </li>
+    </ul>
+  </div>
+  <script src="./main.js"></script>
+</body>
+</html>
