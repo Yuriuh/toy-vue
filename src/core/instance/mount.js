@@ -1,7 +1,6 @@
 import { VNode } from '../vdom/vnode'
 import { vmodel } from './directive/v-model'
 import { mergeAttr } from '../util/object-enhance'
-import { vfor } from './directive/v-for'
 import { VIRTUAL_NODE } from '../shared/constants'
 
 import {
@@ -11,7 +10,9 @@ import {
   // getTemplateToVnodeMap,
   // getVnodeToTemplateMap,
 } from './render'
-import { vbind } from './directive/v-bind'
+import { vFor } from './directive/v-for'
+import { vBind } from './directive/v-bind'
+import { vOn } from './directive/v-on'
 
 export function initMount(Vuette) {
   Vuette.prototype.$mount = function(el) {
@@ -56,7 +57,8 @@ function constructVNode(vm, el, parent) {
     }
   }
 
-  vbind(vm, vnode)
+  vBind(vm, vnode)
+  vOn(vm, vnode)
 
   const childs = vnode.nodeType === VIRTUAL_NODE
     ? vnode.parent.el.childNodes
@@ -93,7 +95,7 @@ function analysisAttr(vm, el, parent) {
 
     if (attrs.indexOf('v-for') > -1) {
       const attr = el.getAttribute('v-for')
-      return vfor(vm, el, parent, attr)
+      return vFor(vm, el, parent, attr)
     }
   }
 }

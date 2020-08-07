@@ -2,7 +2,7 @@ import { VNode } from "../../vdom/vnode";
 import { getValue } from "../../util/object-enhance";
 
 // expression: item in list
-export function vfor(vm, el, parent, expression) {
+export function vFor(vm, el, parent, expression) {
   const data = getVirtualNodeData(expression)[2]
   const vnode = new VNode({
     tag: el.nodeName,
@@ -34,7 +34,7 @@ function analysisExpression(vm, expression, el, parent) {
   // exprList[2] 为 list
   const dataList = getValue(vm._data, exprList[2])
   if (!dataList) {
-    throw new Error('vfor 函数无法解析该表达式')
+    throw new Error('vFor 函数无法解析该表达式')
   }
   const result = []
   for (let i = 0; i < dataList.length; i++) {

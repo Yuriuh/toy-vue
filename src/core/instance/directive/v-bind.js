@@ -1,7 +1,7 @@
 import { getValue, getEnvAttr } from "../../util/object-enhance"
 import { generateCode, isTrue } from "../../util/code-generate"
 
-export function vbind(vm, vnode) {
+export function vBind(vm, vnode) {
   if (vnode.nodeType !== Node.ELEMENT_NODE) {
     return
   }

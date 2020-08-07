@@ -9,7 +9,6 @@ export function generateCode(envAttr) {
 export function isTrue(expression, env) {
   let bool = false
   let code = env
-  console.log('code', code)
   code += `if(${expression}) {bool = true}`
   eval(code)
   return bool
