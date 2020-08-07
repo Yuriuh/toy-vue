@@ -11,6 +11,7 @@ import {
   // getTemplateToVnodeMap,
   // getVnodeToTemplateMap,
 } from './render'
+import { vbind } from './directive/v-bind'
 
 export function initMount(Vuette) {
   Vuette.prototype.$mount = function(el) {
@@ -55,7 +56,8 @@ function constructVNode(vm, el, parent) {
     }
   }
 
-  // let childs = vnode.el.childNodes
+  vbind(vm, vnode)
+
   const childs = vnode.nodeType === VIRTUAL_NODE
     ? vnode.parent.el.childNodes
     : vnode.el.childNodes

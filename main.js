@@ -29,6 +29,7 @@ window.app = new Vuette({
           { name: '猴子', age: 14 },
         ]
       }
-    ]
+    ],
+    imgSrc: 'https://static001.geekbang.org/resource/image/bb/21/bb38fb7c1073eaee1755f81131f11d21.jpg',
   }
 })
