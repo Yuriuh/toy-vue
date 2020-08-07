@@ -31,5 +31,6 @@ window.app = new Vuette({
       }
     ],
     imgSrc: 'https://static001.geekbang.org/resource/image/bb/21/bb38fb7c1073eaee1755f81131f11d21.jpg',
+    red: 'red',
   }
 })

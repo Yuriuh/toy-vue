@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vuette</title>
+  <style>
+    .red {
+      color: red;
+    }
+    .blue {
+      color: blue;
+    }
+    .big {
+      font-size: 1.5em;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
@@ -31,13 +42,17 @@
       </li>
     </ul> -->
 
-    <ul>
+    <!-- <ul>
       <li v-for="(item,index) in list">
         name: {{ item.name }} {{ index }}
       </li>
-    </ul>
+    </ul> -->
 
-    <img :src="imgSrc" alt="logo">
+    <!-- <img :src="imgSrc" alt="logo"> -->
+
+    <span :class="red">我的天啊</span>
+    <br>
+    <span :class="{big: obj.b < 3, blue: obj.b < 3}">我的地啊</span>
 
   </div>
   <script src="./main.js"></script>

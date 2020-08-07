@@ -74,7 +74,7 @@ function cloneObject(obj) {
   for (let i = 0; i < names.length; i++) {
     const name = names[i]
     const value = obj[name]
-    result[name] = clone(value)
+    result[name] = deepClone(value)
   }
   return result
 }
@@ -83,7 +83,13 @@ function cloneArray(arr) {
   const result = []
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i]
-    result[i] = clone(item)
+    result[i] = deepClone(item)
   }
+  return result
+}
+
+export function getEnvAttr(vm, vnode) {
+  let result = mergeAttr(vm._data, vnode.env)
+  result = mergeAttr(result, vm._computed)
   return result
 }
