@@ -1,3 +1,5 @@
+let id = 1
+
 export class VNode {
   // tag: 标签类型 DIV SPAN INPUT #text
   // el: 对应的真实节点
@@ -21,5 +23,6 @@ export class VNode {
     this.expression = null
     // 当前节点涉及到的模板
     this.template = []
+    this.id = id++
   }
 }

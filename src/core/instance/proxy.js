@@ -1,10 +1,10 @@
+import { renderData } from "./render"
+import { rebuild } from './mount'
+
 // vm 表示 Vuette 对象
 // obj 表示要进行代理的对象
 // namespace
 // 我们要知道哪个属性被修改了，我们才能对页面上的内容进行更新
-
-import { renderData } from "./render"
-
 // 所以我们需要用代理的方式来实现监听属性修改
 export function proxy(vm, obj, namespace) {
   // 递归
@@ -72,8 +72,8 @@ function defineArrayMethod(obj, fnName, namespace, vm) {
     value(...args) {
       let original = arrayProto[fnName]
       const result = original.apply(this, args)
-      // console.log('namespace in defineArray', getNameSpace(namespace))
       const ns = getNameSpace(namespace, '')
+      rebuild(vm, ns)
       // 检测到数组的变化, 然后渲染视图
       renderData(vm, ns)
       return result

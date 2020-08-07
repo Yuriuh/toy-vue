@@ -1,4 +1,5 @@
 import { getValue } from "../util/object-enhance"
+import { VIRTUAL_NODE } from '../shared/constants'
 
 // 1. 通过模板, 找到哪些节点用到了这个模板
 let templateToVnode = new Map()
@@ -15,7 +16,6 @@ export function renderMixin(Vuette) {
 }
 
 export function renderData(vm, data) {
-  // console.log('data', data)
   const vnodes = templateToVnode.get(data)
   // console.log('vnodes', vnodes)
   if (vnodes != null) {
@@ -36,8 +36,8 @@ export function renderNode(vm, vnode) {
       for (let i = 0; i < templates.length; i++) {
         // 当前节点的参数, 可以来自 Vuette 对象, 也可以来自于父级节点
         const t = templates[i]
-        console.log('vnode in render', vnode)
-        console.log('vnode env in render', vnode.env)
+        // console.log('vnode in render', vnode)
+        // console.log('vnode env in render', vnode.env)
         let templateValue = getTemplateValue([vm._data, vnode.env], t)
         // console.log('templateValue', templateValue)
         // 把虚拟 dom 中的值替换到真实 dom 中
@@ -67,16 +67,18 @@ export function renderNode(vm, vnode) {
 
 export function prepareRender(vm, vnode) {
   if (vnode == null) {
-
+    return
   }
   if (vnode.nodeType === Node.TEXT_NODE) {
     analysisTemplateString(vnode)
   }
+  if (vnode.nodeType === VIRTUAL_NODE) {
+    setTemplateToVnode(vnode.data, vnode)
+    setVnodeToTemplate(vnode.data, vnode)
+  }
   analysisAttr(vm, vnode)
-  if (vnode.nodeType === Node.ELEMENT_NODE) {
-    for (let i = 0; i < vnode.children.length; i++) {
-      prepareRender(vm, vnode.children[i])
-    }
+  for (let i = 0; i < vnode.children.length; i++) {
+    prepareRender(vm, vnode.children[i])
   }
 }
 
@@ -150,6 +152,15 @@ export function getTemplateToVnodeMap() {
 
 export function getVnodeToTemplateMap() {
   return vnodeToTemplate
+}
+
+export function getVnodesByTemplate(template) {
+  return templateToVnode.get(template)
+}
+
+export function clearMap() {
+  templateToVnode.clear()
+  vnodeToTemplate.clear()
 }
 
 // console.log('templateToVnode', templateToVnode)

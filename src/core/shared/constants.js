@@ -1,0 +1,1 @@
+export const VIRTUAL_NODE = 0

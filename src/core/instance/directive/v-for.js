@@ -22,7 +22,7 @@ export function vfor(vm, el, parent, expression) {
 // 只支持 (item) in list
 function getVirtualNodeData(expression) {
   const exprList = expression.trim().split(' ')
-  console.log('exprList', exprList)
+  // console.log('exprList', exprList)
   if (exprList.length !== 3 || (exprList[1] !== 'in' && exprList[1] !== 'of')) {
     throw new SyntaxError('请使用 (item,index) in list 这种语法, 括号中间不要有空格')
   }

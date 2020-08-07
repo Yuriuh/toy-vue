@@ -2,11 +2,14 @@ import { VNode } from '../vdom/vnode'
 import { vmodel } from './directive/v-model'
 import { mergeAttr } from '../util/object-enhance'
 import { vfor } from './directive/v-for'
+import { VIRTUAL_NODE } from '../shared/constants'
 
 import {
   prepareRender,
-  getTemplateToVnodeMap,
-  getVnodeToTemplateMap
+  getVnodesByTemplate,
+  clearMap,
+  // getTemplateToVnodeMap,
+  // getVnodeToTemplateMap,
 } from './render'
 
 export function initMount(Vuette) {
@@ -28,7 +31,6 @@ export function mount(vm, el) {
 
 // 深度优先搜索
 function constructVNode(vm, el, parent) {
-  // let vnode = null
   let vnode = analysisAttr(vm, el, parent)
   // console.log('vnode', vnode)
   if (vnode == null) {
@@ -53,7 +55,11 @@ function constructVNode(vm, el, parent) {
     }
   }
 
-  let childs = vnode.el.childNodes
+  // let childs = vnode.el.childNodes
+  const childs = vnode.nodeType === VIRTUAL_NODE
+    ? vnode.parent.el.childNodes
+    : vnode.el.childNodes
+
   for (let i = 0; i < childs.length; i++) {
     let childNodes = constructVNode(vm, childs[i], vnode)
     // 返回单一节点
@@ -87,5 +93,18 @@ function analysisAttr(vm, el, parent) {
       const attr = el.getAttribute('v-for')
       return vfor(vm, el, parent, attr)
     }
+  }
+}
+
+export function rebuild(vm, template) {
+  const vnodes = getVnodesByTemplate(template)
+  for (let i = 0; i < vnodes.length; i++) {
+    const vnode = vnodes[i]
+    vnode.parent.el.innerHTML = ''
+    vnode.parent.el.appendChild(vnode.el)
+    const result = constructVNode(vm, vnode.el, vnode.parent)
+    vnode.parent.children = [result]
+    clearMap()
+    prepareRender(vm, vm._vnode)
   }
 }
