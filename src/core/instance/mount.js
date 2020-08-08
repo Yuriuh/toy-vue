@@ -13,6 +13,7 @@ import {
 import { vFor } from './directive/v-for'
 import { vBind } from './directive/v-bind'
 import { vOn } from './directive/v-on'
+import { vIf } from './directive/v-if'
 
 export function initMount(Vuette) {
   Vuette.prototype.$mount = function(el) {
@@ -59,6 +60,7 @@ function constructVNode(vm, el, parent) {
 
   vBind(vm, vnode)
   vOn(vm, vnode)
+  vIf(vm, vnode)
 
   const childs = vnode.nodeType === VIRTUAL_NODE
     ? vnode.parent.el.childNodes

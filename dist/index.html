@@ -55,6 +55,9 @@
     <span :class="{big: obj.b < 3, blue: obj.b < 3}">我的地啊</span> -->
 
     <input type="text" v-model="obj.b" @keydown="handleKeydown">
+    <p>
+      {{ obj.b }}
+    </p>
 
   </div>
   <script src="./main.js"></script>

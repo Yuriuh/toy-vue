@@ -31,8 +31,11 @@ function getVirtualNodeData(expression) {
 
 function analysisExpression(vm, expression, el, parent) {
   const exprList = getVirtualNodeData(expression)
+  console.log('exprList', exprList)
   // exprList[2] 为 list
+  console.log('data name', exprList[2])
   const dataList = getValue(vm._data, exprList[2])
+  // console.log('dataList', dataList)
   if (!dataList) {
     throw new Error('vFor 函数无法解析该表达式')
   }
@@ -43,7 +46,6 @@ function analysisExpression(vm, expression, el, parent) {
     // exprList[0] 为 (item, index)
     // 获取局部变量
     const env = analysisKV(exprList[0], dataList[i], i)
-    // console.log('env', env)
     tempDom.setAttribute('env', JSON.stringify(env))
     parent.el.appendChild(tempDom)
     result.push(tempDom)

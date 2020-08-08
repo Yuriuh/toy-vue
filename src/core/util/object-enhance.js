@@ -3,14 +3,18 @@ export function getValue(obj, name) {
   if (!obj) return obj
 
   const nameList = name.split('.')
+  // console.log('nameList', nameList)
   let temp = obj
   for (let i = 0; i < nameList.length; i++) {
+    // console.log('name', nameList[i])
     if (temp[nameList[i]] != null) {
       temp = temp[nameList[i]]
+      // console.log('temp', temp)
     } else {
       return void 0
     }
   }
+  console.log('temp', temp)
   return temp
 }
 

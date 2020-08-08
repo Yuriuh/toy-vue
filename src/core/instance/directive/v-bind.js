@@ -47,6 +47,7 @@ function analysisExpression(vm, vnode, exprList) {
     const colonIndex = expr.indexOf(':')
     if (colonIndex > -1) {
       const code = expr.slice(colonIndex + 1, expr.length)
+      // console.log('code', code)
       // 结合上面的环境声明代码, 来验证这个表达式是否成立
       if(isTrue(code, envCode)) {
         result += expr.slice(0, colonIndex) + ','

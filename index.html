@@ -18,43 +18,18 @@
 </head>
 <body>
   <div id="app">
-    <!-- <p>
-      你好, {{  content  }}, {{ description }}
-    </p>
-    <p>
-      {{ description }}, {{ content }}
-    </p>
 
-    <input type="text" v-model="obj.innerObj.a">
-
-    <p>
-      {{ obj.innerObj.a }}
-    </p> -->
-
-    <!-- <ul>
-      <li v-for="(list) in nestList">
-        <ul>
-          <li v-for="item in list">
-            name: {{ item.name }}
-            age: {{ item.age }}
-          </li>
-        </ul>
-      </li>
-    </ul> -->
-
-    <!-- <ul>
+    <ul>
       <li v-for="(item,index) in list">
         name: {{ item.name }} {{ index }}
       </li>
-    </ul> -->
+    </ul>
 
+    <!-- <p v-if="obj.b < 3">vif</p> -->
     <!-- <img :src="imgSrc" alt="logo"> -->
-
-    <!-- <span :class="red">我的天啊</span>
-    <br>
-    <span :class="{big: obj.b < 3, blue: obj.b < 3}">我的地啊</span> -->
-
-    <input type="text" v-model="obj.b" @keydown="handleKeydown">
+    <!-- <span :class="red">我的天啊</span> -->
+    <!-- <span :class="{big: obj.b < 3, blue: obj.b < 3}">我的地啊</span> -->
+    <!-- <input type="text" v-model="obj.b" @keydown="handleKeydown"> -->
 
   </div>
   <script src="./main.js"></script>

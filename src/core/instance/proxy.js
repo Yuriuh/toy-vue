@@ -1,5 +1,6 @@
 import { renderData } from "./render"
 import { rebuild } from './mount'
+import { getValue } from "../util/object-enhance"
 
 // vm 表示 Vuette 对象
 // obj 表示要进行代理的对象
@@ -32,11 +33,12 @@ function proxyObject(vm, obj, namespace) {
         return obj[key]
       },
       set(v) {
-        // console.log('value in set', v)
         obj[key] = v
         const ns = getNameSpace(namespace, key)
-        // console.log('ns', ns)
-        // 检测到对象属性的变化, 然后渲染视图
+        const val = getValue(vm._data, ns)
+        if (Array.isArray(val)) {
+          rebuild(vm, ns)
+        }
         renderData(vm, ns)
       }
     })
@@ -49,7 +51,10 @@ function proxyObject(vm, obj, namespace) {
       set(v) {
         obj[key] = v
         const ns = getNameSpace(namespace, key)
-        // console.log('ns', ns)
+        const val = getValue(vm._data, ns)
+        if (Array.isArray(val)) {
+          rebuild(vm, ns)
+        }
         // 检测到对象属性的变化, 然后渲染视图
         renderData(vm, ns)
       }
